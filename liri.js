@@ -1,10 +1,10 @@
-// var twitter = require("twitter");
+var twitter = require("twitter");
 var spotify = require('node-spotify-api');
 var request = require("request");
 var fs = require("fs");
 var apiKeys = require("./keys.js");
 
-// var twitterAPIKey = new twitter(apiKeys.twitterKeys);
+var twitterAPIKey = new twitter(apiKeys.twitterKeys);
 var spotifyAPIKey = new spotify(apiKeys.spotifyKeys);
 
 // Set up variables that target what file to search and what to search for
@@ -24,7 +24,7 @@ function showInstructions() {
         "Type 'node liri.js my-tweets' to see my last 20 tweets" + "\n" +
         "Type 'node liri.js spotify-this-song' and a song title to find information on this song" + "\n" +
         "Type 'node liri.js movie-this' and a movie title to find information on this song" + "\n" +
-        "Type 'node lirl.js do-what-it-says' to call a pre-defined song" + "\n" +
+        "Type 'node liri.js do-what-it-says' to call a pre-defined song" + "\n" +
         '----------------------------------------------'
     );
 };
@@ -32,9 +32,9 @@ function showInstructions() {
 //Creating switch statement which calls back various functions depending on the search criteria
 function switchAction () {
     switch (action) {
-        // case "my-tweets":
-        // getTweets();
-        // break;
+        case "my-tweets":
+        getTweets();
+        break;
 
         case "spotify-this-song":
         getSpotify();
@@ -51,26 +51,26 @@ function switchAction () {
 };
 
 // If Twitter gets chosen...
-// function getTweets() {
-//     console.log ("Getting tweets");
+function getTweets() {
+    console.log ("Getting tweets");
 
-//     var params = {
-//         screen_name: "findingthehcd"
-//     };
-//     twitterAPIKey.get('statuses/user_timeline', params, function (error, tweets, response) {
-// 		if (error) {
-// 	  		console.log ('An error occurred: ' + error)
-// 		} else {
-// 			  console.log('-------------------------')
-// 			  for (var j = 0; j < tweets.length; j++) {
-// 			    var twitterTweets = ('Tweet Number: ' + (j + 1) + '\n' + tweets[j].created_at + '\n' + tweets[j].text + '\n')
-// 			    console.log(twitterTweets)
-// 			    console.log('--------------------------');
-// 			  }
-//       }
-//       showInstructions();
-//   });
-// };
+    var params = {
+        screen_name: "findingthehcd"
+    };
+    twitterAPIKey.get('statuses/user_timeline', params, function (error, tweets, response) {
+		if (error) {
+	  		console.log ('An error occurred: ' + error)
+		} else {
+			  console.log('-------------------------')
+			  for (var j = 0; j < tweets.length; j++) {
+			    var twitterTweets = ('Tweet Number: ' + (j + 1) + '\n' + tweets[j].created_at + '\n' + tweets[j].text + '\n')
+			    console.log(twitterTweets)
+			    console.log('--------------------------');
+			  }
+      }
+      showInstructions();
+  });
+};
 
 //If Spotify gets chosen...
 function getSpotify(){
